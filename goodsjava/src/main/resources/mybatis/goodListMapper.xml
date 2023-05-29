@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.GoodsListMapper">
+
+    <resultMap type="GoodsList" id="goodsList">
+        <result property="goodsId"    column="goods_id"    />
+        <result property="goodsName"    column="goods_name"    />
+        <result property="number"    column="number"    />
+        <result property="price"    column="price"    />
+        <result property="type"    column="type"    />
+        <result property="picture"    column="picture"    />
+        <result property="remark"    column="remark"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+    <sql id="selectGoodsAll">
+        select goods_id, goods_name, number, price, type,picture,remark,create_time  from goods_list
+    </sql>
+
+    <select id="selectGoodsList"  parameterType="GoodsList" resultMap="goodsList">
+        select goods_id, goods_name, number, price, type,picture,remark,create_time  from goods_list
+        <where>
+            <if test="goodsName != null and goodsName != ''">goods_name like concat('%',#{goodsName},'%') </if>
+            <if test="type != null and type != ''">and type like concat('%',#{type},'%') </if>
+            <if test="goodsId != null and goodsId != ''">and goods_id = #{goodsId}</if>
+        </where>
+       order by create_time desc
+    </select>
+
+    <insert id="insertGoodsAll" parameterType="GoodsList">
+        insert into goods_list(
+        <trim suffix="" suffixOverrides=",">
+            <if test="goodsName != null and goodsName != ''">goods_name,</if>
+            <if test="number != null and number != ''">number,</if>
+            <if test="price != null and price != ''">price,</if>
+            <if test="type != null and type != ''">type,</if>
+            <if test="picture != null and picture != ''">picture,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+            create_time
+        </trim>
+        )values(
+        <trim suffix="" suffixOverrides=",">
+            <if test="goodsName != null and goodsName != ''">#{goodsName},</if>
+            <if test="number != null and number != ''">#{number},</if>
+            <if test="price != null and price != ''">#{price},</if>
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="picture != null and picture != ''">#{picture},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+            sysdate()
+
+        </trim>
+        )
+    </insert>
+    <update id="updateGoodsAll" parameterType="GoodsList">
+            update goods_list
+            <set>
+                <if test="goodsName != null and goodsName != ''">goods_name = #{goodsName},</if>
+                <if test="number != null and number != ''">number = #{number},</if>
+                <if test="price != null and price != ''">price = #{price},</if>
+                <if test="type != null and type != ''">type = #{type},</if>
+                <if test="picture != null and picture != ''">picture = #{picture},</if>
+                <if test="remark != null and remark != ''">remark = #{remark},</if>
+            </set>
+            where goods_id = #{goodsId}
+        </update>
+
+    <delete id="deleteGoodsById" parameterType="Long">
+        delete from goods_list where goods_id = #{goodsId}
+    </delete>
+
+
+
+
+
+
+</mapper>

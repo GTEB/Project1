@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+    <resultMap type="User" id="user">
+        <result property="userId"    column="user_id"    />
+        <result property="password"    column="password"    />
+        <result property="userName"    column="user_name"    />
+        <result property="loginName"    column="login_name"    />
+
+    </resultMap>
+    <sql id="selectAlarmAll">
+        select user_id, user_name, login_name, password  from user
+    </sql>
+
+    <select id="selectList"  parameterType="User" resultMap="user">
+        select user_id, user_name, login_name, password from user
+        <where>
+            <if test="loginName != null and loginName != ''">login_name like concat('%',#{loginName},'%') </if>
+            <if test="userId != null and userId != ''">user_id = #{userId}</if>
+        </where>
+       order by user_id desc
+    </select>
+
+    <select id="selectByName" parameterType="String" resultMap="user">
+         select user_id, user_name, login_name, password
+         from user
+         where  user_name=#{userName} and password=#{password}
+    </select>
+
+    <insert id="insertUserAll" parameterType="User">
+        insert into user(
+        <trim suffix="" suffixOverrides=",">
+        <if test="userName != null and userName != ''">user_name,</if>
+        <if test="password != null and password != ''">password,</if>
+        <if test="loginName != null and loginName != ''">login_name</if>
+        </trim>
+        )values(
+        <trim suffix="" suffixOverrides=",">
+        <if test="userName != null and userName != ''">#{userName},</if>
+        <if test="password != null and password != ''">#{password},</if>
+        <if test="loginName != null and loginName != ''">#{loginName}</if>
+        </trim>
+        )
+    </insert>
+    <update id="updateUserAll" parameterType="User">
+            update user
+            <set>
+                <if test="userName != null and userName != ''">user_name = #{userName},</if>
+                <if test="password != null and password != ''">password = #{password},</if>
+                <if test="loginName != null and loginName != ''">login_name = #{loginName},</if>
+
+            </set>
+            where user_id = #{userId}
+        </update>
+
+    <delete id="deleteUserById" parameterType="String">
+        delete from user where user_id = #{userId}
+    </delete>
+
+
+
+
+
+
+</mapper>

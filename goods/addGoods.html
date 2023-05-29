@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="./css/user.css" />
+		<link rel="stylesheet" type="text/css" href="./css/login.css" />
+		<link rel="stylesheet" type="text/css" href="./bootstrap-4.6.1-dist/css/bootstrap.min.css" />
+		<script src="./bootstrap-4.6.1-dist/js/jquery-latest.js"></script>
+		<script src="./bootstrap-4.6.1-dist/js/bootstrap.min.js"></script>
+
+		<link rel="stylesheet" href="./bootstrap-fileinput/fileinput.min.css">
+
+		<link rel="stylesheet" href="./bootstrap-fileinput/font-awesome.min.css">
+		<script src="./bootstrap-fileinput/fileinput.min.js"></script>
+
+		<script src="./js/alert.js"></script>
+		<script src="./js/pageMe.js"></script>
+		<style>
+			.leftTile {
+				width: 170px;
+				color: white;
+				font-weight: 600;
+				border-radius: 15px;
+				font-size: 22px;
+				cursor: pointer;
+
+			}
+
+		
+		</style>
+	</head>
+	<body>
+		<div style="padding: 30px;background-color: #8a81ae;width: 100%;height: 100%;">
+			<div style="display: flex;justify-content: space-around;padding-bottom: 20px;">
+				<div class="leftTile" onclick="window.location.href='index.html'">
+					I-Brand
+				</div>
+				<div style="display: flex;">
+					<input type="text" class="form-control" id="userName" placeholder="search" required>
+					<button class="btn btn-warning" style="margin-left: 20px;">search</button>
+				</div>
+				<div>
+					<span id="name" style="color: white;font-weight: 600;">admin</span>
+				</div>
+			</div>
+			<div style="background-color: #d3cbf0;width: 100%;border-radius: 5px;padding: 30px;">
+				<div style="background-color: #ffffff;">
+					<h2 style="margin-left: 20px;color: salmon;font-weight: 600;text-align: center;">Add major brands
+					</h2>
+					<div class="card-body" style="height: 76vh;">
+						<div class="content">
+							<button type="button" class="btn btn-primary" onclick="AddModel()">
+								<img src="./images/加.png" width="23" />
+								<span>Add</span>
+							</button>
+							<!--添加按钮及bootstrap的模态框-->
+							<div class="export" style="line-height: 40px;">
+
+								<!-- 新增模态框 -->
+								<div class="modal fade" id="renyuan">
+									<div class="modal-dialog modal-lg modal_position">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title"></h4>
+												<button type="button" class="close"
+													data-dismiss="modal">&times;</button>
+											</div>
+											<div class="modal-body">
+												<table id="xztb" class="table">
+													<!--新修改弹窗的样式-->
+													<tbody>
+														<tr>
+															<td class="tb_bg"><label for="">
+																	<font style="font-size: 14px; color: red;">*
+																	</font>Trade name
+																</label>
+															</td>
+															<td><input id="goodsName" class="goodsName" type="text"
+																	placeholder="Please enter the product name" /></td>
+
+														</tr>
+
+														<tr>
+															<td class="tb_bg"><label for="">
+																	<font style="font-size: 14px; color: red;">*
+																	</font>type
+																</label>
+															</td>
+															<td>
+																<select id="type" class="form-control select_down"
+																	style="font-size: 13px; color: #666;" name="type">
+																	<option value="">--Please select a type--</option>
+																	<option value="Bag">Bag</option>
+																	<option value="clothing">clothing</option>
+																	<option value="shoes">shoes</option>
+
+																</select>
+															</td>
+														</tr>
+														<tr>
+															<td class="tb_bg"><label for="">
+																	<font style="font-size: 14px; color: red;">*
+																	</font>num
+																</label>
+															</td>
+															<td><input id="num" class="num" type="number" name="num"
+																	placeholder="Please enter the quantity" /></td>
+
+														</tr>
+														<tr>
+															<td class="tb_bg"><label for="">
+																	<font style="font-size: 14px; color: red;">*
+																	</font>price
+																</label>
+															</td>
+															<td><input id="price" class="price" name="price"
+																	type="number"
+																	placeholder="Please enter the price" /></td>
+
+														</tr>
+														<tr>
+															<td class="tb_bg"><label for="">
+																	<font style="font-size: 14px; color: red;">*
+																	</font>picture
+																</label>
+															</td>
+															<td>
+																<input type="hidden" name="attachmentName"
+																	id="attachmentName">
+																<div class="file-loading">
+																	<input class="form-control file-upload"
+																		id="attachmentInformation" name="file"
+																		type="file" multiple data-show-upload="true"
+																		data-show-caption="true"
+																		data-msg-placeholder="Select files for upload...">
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td class="tb_bg"><label for="">
+																	<font style="font-size: 14px; color: red;">*
+																	</font>Details
+																</label>
+															</td>
+															<td>
+																<textarea name="details"
+																	placeholder="Please enter a detailed introduction"
+																	class="form-control" id="details"
+																	rows="3"></textarea>
+
+															</td>
+
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<div class="modal-footer ">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">Cancel</button>
+												<button type="button" class="btn btn-secondary"
+													onclick="registerAdd()">determine</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!--表格列表-->
+						<div style="height: 480px;">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>商品名称</th>
+										<th>商品数量</th>
+										<th>商品价格</th>
+										<th>商品图片</th>
+										<th>type</th>
+										<th>商品详情</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody id="show_tbody">
+
+
+								</tbody>
+							</table>
+							<!-- 底部分页 -->
+							<div style="text-align: center;">
+								<div id='page' class='page_div'></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(".file-upload").fileinput({
+			uploadUrl: 'http://localhost:80/goods/upload',
+			maxFileCount: 1,
+			autoReplace: true,
+			dropZoneEnabled: false,
+			enctype: 'multipart/form-data',
+			browseLabel: 'Browse',
+			allowedFileExtensions: ['jpg', 'jpeg', 'png'],
+
+		}).on('fileuploaded', function(event, data, previewId, index) {
+			// $("input[name='attachmentName']").val(data.files[0].msg)
+
+			$("#attachmentName").val(data.response.msg)
+
+			// $("input[name='" + event.currentTarget.id + "']").val(data.response.msg)
+		}).on('fileremoved', function(event, id, index) {
+			$("input[name='" + event.currentTarget.id + "']").val('')
+		})
+	</script>
+	<script type="text/javascript">
+		var limit = 3 //显示条数
+		var page = 1 //默认页数
+		var current = 1 //当前页
+
+		var updateUserId = ""
+		// //判断是否登录  没登录重定向到登录页面
+		// $(function() {
+		// 	if (localStorage.getItem("token") == "" || localStorage.getItem("token") == undefined ||
+		// 		localStorage.getItem(
+		// 			"token") == null) {
+		// 		window.location.href = "login.html"
+		// 	}
+		// })
+
+		// 打开新增弹窗
+		function AddModel() {
+			$("#goodsName").val("")
+			$("#type").val("")
+			$("#num").val("")
+			$("#price").val("")
+			$("#attachmentName").val("")
+				$("#attachmentInformation").val("")
+			
+			$("#details").val("")
+			$(".modal-title").html("Add")
+			$('#renyuan').modal('show');
+
+		}
+		// 获取数据
+		search(page, limit)
+
+		function search(page1, limit1) {
+			$("#show_tbody").html("")
+			$.ajax({
+				type: "post", 
+				url: "http://localhost:80/goods/selectGoodsList",
+				data: {
+					pageSize: limit1,
+					pageNum: page1,
+				},
+				success: function(res) {
+
+					if (res.code == "0") {
+						let data = res.rows;
+						// 分页插件
+						$("#page").paging({
+							pageNum: current, // 当前页面
+							totalNum: Math.ceil(res.total / limit), 
+							totalList: res.total, 
+							callback: function(num) { 
+								console.log(num);
+								current = num
+								search(num, limit)
+							}
+						});
+
+						if (data == "") {
+							commonUtil.message("No Data！");
+						}
+						data.forEach(function(item, index) {
+
+							$("#show_tbody").append("<tr>" +
+
+								"<td><div style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap;width:500px'>" + item.goodsName + "</div></td>" +
+								"<td>" + item.number + "</td>" +
+								"<td>" + "<span class='badge badge-danger'>" + item.price + "</span>" +
+								"</td>" +
+								"<td><img src="+item.picture+" width='100' height='100'/>" +"</td>" +
+								"<td>" + item.type + "</td>" +
+								"<td><div style='overflow: hidden; text-overflow: ellipsis; white-space: nowrap;width:200px'>" + item.remark + "</div></td>" +
+								"<td>" +
+								"<a class='badge badge-warning' href='#' onclick='updateUserById(\"" +
+								item.goodsId + "\")'>modify</a>" +
+								"<a class='badge badge-danger a' href='#' onclick='deleteById(\"" +
+								item.goodsId + "\")'>delete</a>" + "</td>" +
+								"</tr>")
+						})
+					}
+				},
+				error: function(data) {
+					commonUtil.message("Query failed！")
+				}
+			})
+		}
+		// 修改用户信息
+		function updateUserById(userId) {
+			$.ajax({
+				type: "post",
+				url: "http://localhost:80/goods/selectGoodsList",
+				data: {
+					goodsId: userId,
+				},
+				success: function(res) {
+					if (res.code == "0") {
+						let data = res.rows[0];
+						$("#goodsName").val(data.goodsName)
+						$("#num").val(data.number)
+						$("#type").val(data.type)
+						$("#details").val(data.remark)
+						$("#price").val(data.price)
+						$("#attachmentInformation").val(data.picture)
+					}
+				}
+			})
+			updateUserId = userId
+			$(".modal-title").html("update")
+			$('#renyuan').modal('show');
+		}
+		//新增确定
+		function registerAdd() {
+			let modalTitle = $(".modal-title").html()
+			if (modalTitle == "Add") {
+				if ($("#goodsName").val().length == 0 || $("#type").val().length == 0 || $("#attachmentName").val().length ==
+					0 ||
+					$("#price").val().length == 0 || $("#details").val().length == 0) {
+					commonUtil.message("Form cannot be empty！");
+
+				} else {
+					$('#renyuan').modal('hide');
+					$.ajax({
+						type: "post",
+						url: "http://localhost:80/goods/insertGoodsAll",
+						data: {
+							goodsName: $("#goodsName").val(),
+							type: $("#type").val(),
+							number: $("#num").val(),
+							price: $("#price").val(),
+							picture: $("#attachmentName").val(),
+							remark: $("#details").val()
+						},
+						success: function(data) {
+							if (data.code == "SUCCESS") {
+								commonUtil.message("Successfully added!")
+								search(page, limit)
+							}
+						},
+						error: function(data) {
+							commonUtil.message("Add failed!")
+						}
+					})
+
+				}
+
+			} else if (modalTitle == "update") {
+				$('#renyuan').modal('hide');
+
+				$.ajax({
+					type: "post",
+					url: "http://localhost:80/goods/updateGoodsAll",
+					data: {
+						goodsId: updateUserId,
+						goodsName: $("#goodsName").val(),
+						type: $("#type").val(),
+						number: $("#num").val(),
+						price: $("#price").val(),
+						picture: $("#attachmentName").val(),
+						remark: $("#details").val()
+					},
+					success: function(data) { // data是形参名，代表返回的数据
+						if (data.code == "SUCCESS") {
+							commonUtil.message("Successfully modified！")
+							search(page, limit)
+						}
+					},
+					error: function(data) {
+						commonUtil.message("Modification failed！")
+					}
+
+
+				})
+
+
+			}
+		}
+
+		//删除方法
+		function deleteById(userId) {
+			if (userId == "") {
+				commonUtil.message("Product ID cannot be empty！")
+			} else {
+				$.ajax({
+					type: "post", // 请求方式
+					url: "http://localhost:80/goods/deleteGoodsById",
+					data: {
+						goodsId: userId,
+					},
+					success: function(res) {
+						if (res.msg == "success") {
+							commonUtil.message("Successfully deleted！")
+							search(page, limit)
+						}
+					},
+					error: function(data) {
+						commonUtil.message("Delete failed！")
+					}
+				})
+			}
+		}
+
+		//logOut
+		function logOut() {
+			localStorage.removeItem("userName")
+			window.location.href = "login.html"
+		}
+	</script>
+</html>

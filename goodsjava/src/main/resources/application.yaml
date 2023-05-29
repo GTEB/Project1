@@ -1,0 +1,47 @@
+server:
+  port: 80
+  servlet:
+    # ???????
+    context-path: /
+  tomcat:
+    # tomcat?URI??
+    uri-encoding: UTF-8
+    # ?????????????100
+    accept-count: 1000
+    threads:
+      # tomcat?????????200
+      max: 800
+      # Tomcat?????????????10
+      min-spare: 100
+
+spring:
+  application:
+    name: demo
+  profiles:
+    active: druid
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 30MB
+      max-request-size: 30MB
+
+# mybatis 日志打印
+logging:
+  level:
+    com.example.demo: DEBUG
+
+blogs:
+  file:
+    savePath: D:\\data\
+    usePath: http://localhost:80/uploads/
+
+
+# MyBatis
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.example.**.entity
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mybatis/*Mapper.xml
+
+
+

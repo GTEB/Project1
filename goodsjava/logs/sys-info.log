@@ -1,0 +1,15 @@
+16:05:44.825 [main] INFO  c.e.d.DemoApplication - [logStarting,55] - Starting DemoApplication using Java 1.8.0_144 on wdf with PID 21536 (C:\Users\wudengfeng\Desktop\demo\target\classes started by wudengfeng in C:\Users\wudengfeng\Desktop\demo)
+16:05:44.828 [main] INFO  c.e.d.DemoApplication - [logStartupProfileInfo,640] - The following 1 profile is active: "druid"
+16:05:45.734 [main] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-80"]
+16:05:45.735 [main] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+16:05:45.735 [main] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.68]
+16:05:45.883 [main] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+16:05:45.977 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - [dataSource,55] - Init DruidDataSource
+16:05:46.232 [main] INFO  c.a.d.p.DruidDataSource - [init,972] - {dataSource-1} inited
+16:05:46.611 [main] INFO  t.m.m.a.MapperCacheDisabler - [removeStaticCache,60] - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+16:05:46.611 [main] INFO  t.m.m.a.MapperCacheDisabler - [removeStaticCache,60] - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+16:05:46.612 [main] INFO  t.m.m.a.MapperCacheDisabler - [removeStaticCache,60] - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+16:05:46.613 [main] INFO  t.m.m.a.MapperCacheDisabler - [removeEntityHelperCache,83] - Clear EntityHelper entityTableMap cache.
+16:05:46.722 [main] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-80"]
+16:05:46.747 [main] INFO  c.e.d.DemoApplication - [logStarted,61] - Started DemoApplication in 2.252 seconds (JVM running for 3.281)
+16:06:07.777 [http-nio-80-exec-1] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
